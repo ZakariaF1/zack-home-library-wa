@@ -1,6 +1,6 @@
 using HomeLibrary.Application.Imports;
 
-namespace HomeLibrary.Application.Abstractions;
+namespace HomeLibrary.Application.Interfaces;
 
 public interface ICsvBookParser
 {

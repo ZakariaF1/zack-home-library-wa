@@ -1,6 +1,6 @@
 using System.Text;
 using System.Text.Json;
-using HomeLibrary.Application.Abstractions;
+using HomeLibrary.Application.Interfaces;
 using HomeLibrary.Application.Imports;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
