@@ -1,4 +1,4 @@
-using HomeLibrary.Application.Abstractions;
+using HomeLibrary.Application.Interfaces;
 using HomeLibrary.Application.Books;
 using HomeLibrary.Application.Imports;
 using HomeLibrary.Infrastructure.Csv;

@@ -1,6 +1,6 @@
 using HomeLibrary.Domain;
 
-namespace HomeLibrary.Application.Abstractions;
+namespace HomeLibrary.Application.Interfaces;
 
 public interface IBookRepository
 {

@@ -1,4 +1,4 @@
-using HomeLibrary.Application.Abstractions;
+using HomeLibrary.Application.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace HomeLibrary.Application.Imports;

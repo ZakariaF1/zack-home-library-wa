@@ -1,4 +1,4 @@
-using HomeLibrary.Application.Abstractions;
+using HomeLibrary.Application.Interfaces;
 using HomeLibrary.Domain;
 
 namespace HomeLibrary.Application.Tests.Fakes;

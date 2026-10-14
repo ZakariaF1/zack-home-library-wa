@@ -1,4 +1,4 @@
-using HomeLibrary.Application.Abstractions;
+using HomeLibrary.Application.Interfaces;
 
 namespace HomeLibrary.Application.Books;
 
