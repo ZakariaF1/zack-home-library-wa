@@ -31,6 +31,7 @@ public static class DependencyInjection
 
         services.AddScoped<QueueBookImport>();
         services.AddScoped<ListBooks>();
+        services.AddScoped<PersistImportedBook>();
 
         return services;
     }
