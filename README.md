@@ -11,8 +11,8 @@ Bulk CSV import for a home book library: Angular UI → .NET API → RabbitMQ �
 | `dotnet restore src/HomeLibrary.slnx` | Restore .NET dependencies |
 | `dotnet build src/HomeLibrary.slnx` | Build API, Worker, and libraries |
 | `dotnet test src/HomeLibrary.slnx` | Run xUnit tests |
-| `dotnet run --project src/HomeLibrary.Api` | Run API locally (`/health`) |
-| `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally (placeholder until import consumer lands) |
+| `dotnet run --project src/HomeLibrary.Api` | Run API locally (`http://localhost:8080`) |
+| `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally (import consumer lands next) |
 
 ### Typical workflow (current)
 
@@ -20,9 +20,11 @@ Bulk CSV import for a home book library: Angular UI → .NET API → RabbitMQ �
 cp .env.example .env
 docker compose up -d
 dotnet test src/HomeLibrary.slnx
+dotnet run --project src/HomeLibrary.Api
+# POST multipart CSV to /api/imports ; GET /api/books (empty until Worker persists)
 ```
 
-Full-stack `docker compose up -d --build` (API + Worker + web) and import endpoints are being added in follow-up changes. Architecture: [docs/ard.md](docs/ard.md).
+Worker persistence and Angular UI come next. Architecture: [docs/ard.md](docs/ard.md).
 
 ---
 
