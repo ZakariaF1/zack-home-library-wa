@@ -40,15 +40,15 @@
     </div>
   </section>
 
-  @if (error()) {
-    <p class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
-      {{ error() }}
+  @if (status()) {
+    <p class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900" role="status">
+      {{ status() }}
     </p>
   }
 
-  @if (status()) {
-    <p class="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status">
-      {{ status() }}
+  @if (error()) {
+    <p class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+      {{ error() }}
     </p>
   }
 
@@ -62,7 +62,11 @@
       <p class="rounded-xl bg-white/80 px-4 py-8 text-stone-500">Loading books…</p>
     } @else if (books().length === 0) {
       <p class="rounded-xl bg-white/80 px-4 py-8 text-stone-500">
-        No books yet. Upload a CSV to start filling the shelf.
+        @if (uploading()) {
+          Uploading CSV…
+        } @else {
+          No books yet. Upload a CSV to start filling the shelf. After upload, the Worker must be running for rows to appear.
+        }
       </p>
     } @else {
       <div class="overflow-hidden rounded-2xl border border-stone-200 bg-white/90 shadow-sm">

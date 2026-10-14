@@ -50,7 +50,8 @@ app.MapPost("/api/imports", async (
 
         await using var stream = file.OpenReadStream();
         var result = await queueBookImport.ExecuteAsync(stream, contentType, cancellationToken);
-        return Results.Accepted(value: new { queuedCount = result.QueuedCount });
+        // Explicit JSON + 202 so clients reliably receive the body.
+        return Results.Json(new { queuedCount = result.QueuedCount }, statusCode: StatusCodes.Status202Accepted);
     }
     catch (UseCaseException ex)
     {
