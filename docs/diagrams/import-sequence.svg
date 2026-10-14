@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="460" viewBox="0 0 880 460" role="img" aria-labelledby="title desc">
+  <title id="title">Import sequence</title>
+  <desc id="desc">Sequence: Web to Api to RabbitMQ to Worker to PostgreSQL.</desc>
+  <rect width="880" height="460" fill="#f7f7f4"/>
+  <text x="24" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">Import sequence (target)</text>
+
+  <text x="80" y="80" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Web</text>
+  <text x="240" y="80" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Api</text>
+  <text x="400" y="80" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">RabbitMQ</text>
+  <text x="560" y="80" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Worker</text>
+  <text x="720" y="80" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">PostgreSQL</text>
+
+  <line x1="80" y1="95" x2="80" y2="420" stroke="#999" stroke-width="1"/>
+  <line x1="240" y1="95" x2="240" y2="420" stroke="#999" stroke-width="1"/>
+  <line x1="400" y1="95" x2="400" y2="420" stroke="#999" stroke-width="1"/>
+  <line x1="560" y1="95" x2="560" y2="420" stroke="#999" stroke-width="1"/>
+  <line x1="720" y1="95" x2="720" y2="420" stroke="#999" stroke-width="1"/>
+
+  <line x1="80" y1="130" x2="240" y2="130" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="160" y="122" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">POST /api/imports (CSV)</text>
+
+  <line x1="240" y1="180" x2="400" y2="180" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="320" y="172" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">publish BookImport × N</text>
+
+  <line x1="240" y1="220" x2="80" y2="220" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="160" y="212" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">202 queuedCount</text>
+
+  <line x1="400" y1="270" x2="560" y2="270" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="480" y="262" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">deliver message</text>
+
+  <line x1="560" y1="320" x2="720" y2="320" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="640" y="312" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">INSERT library row</text>
+
+  <line x1="80" y1="380" x2="240" y2="380" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="160" y="372" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">GET /api/books (poll)</text>
+
+  <line x1="240" y1="420" x2="720" y2="420" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="480" y="412" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11">SELECT ordered by import_date DESC</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#222"/>
+    </marker>
+  </defs>
+</svg>

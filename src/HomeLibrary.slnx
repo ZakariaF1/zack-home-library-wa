@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="../tests/HomeLibrary.Application.Tests/HomeLibrary.Application.Tests.csproj" />
+  <Project Path="../tests/HomeLibrary.Domain.Tests/HomeLibrary.Domain.Tests.csproj" />
+  <Project Path="HomeLibrary.Api/HomeLibrary.Api.csproj" />
+  <Project Path="HomeLibrary.Application/HomeLibrary.Application.csproj" />
+  <Project Path="HomeLibrary.Domain/HomeLibrary.Domain.csproj" />
+  <Project Path="HomeLibrary.Infrastructure/HomeLibrary.Infrastructure.csproj" />
+  <Project Path="HomeLibrary.Worker/HomeLibrary.Worker.csproj" />
+</Solution>

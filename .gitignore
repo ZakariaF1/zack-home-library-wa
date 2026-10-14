@@ -6,6 +6,8 @@ bin/
 obj/
 *.user
 .vs/
+TestResults/
+*.trx
 
 # ---- Node / Angular ----
 node_modules/
