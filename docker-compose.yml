@@ -25,45 +25,65 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
     ports:
-      - "${RABBITMQ_PORT:-5672}:5672"        # AMQP
-      - "${RABBITMQ_MGMT_PORT:-15672}:15672" # management UI
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MGMT_PORT:-15672}:15672"
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "check_running"]
       interval: 5s
       timeout: 5s
       retries: 10
 
-  # ------------------------------------
-  # YOUR SERVICES — uncomment and adjust
-  # -------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: src/HomeLibrary.Api/Dockerfile
+    container_name: home-library-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__Library: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-library};Username=${POSTGRES_USER:-library};Password=${POSTGRES_PASSWORD:-library}"
+      RabbitMq__HostName: rabbitmq
+      RabbitMq__Port: 5672
+      RabbitMq__UserName: ${RABBITMQ_USER:-guest}
+      RabbitMq__Password: ${RABBITMQ_PASSWORD:-guest}
+      RabbitMq__QueueName: book-imports
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
-  # api:
-  #   build:
-  #     context: ./src/Api
-  #   environment:
-  #     ConnectionStrings__Library: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-library};Username=${POSTGRES_USER:-library};Password=${POSTGRES_PASSWORD:-library}"
-  #     RabbitMq__HostName: rabbitmq
-  #     RabbitMq__UserName: ${RABBITMQ_USER:-guest}
-  #     RabbitMq__Password: ${RABBITMQ_PASSWORD:-guest}
-  #   ports:
-  #     - "8080:8080"
+  worker:
+    build:
+      context: .
+      dockerfile: src/HomeLibrary.Worker/Dockerfile
+    container_name: home-library-worker
+    environment:
+      DOTNET_ENVIRONMENT: Production
+      ConnectionStrings__Library: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-library};Username=${POSTGRES_USER:-library};Password=${POSTGRES_PASSWORD:-library}"
+      RabbitMq__HostName: rabbitmq
+      RabbitMq__Port: 5672
+      RabbitMq__UserName: ${RABBITMQ_USER:-guest}
+      RabbitMq__Password: ${RABBITMQ_PASSWORD:-guest}
+      RabbitMq__QueueName: book-imports
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      api:
+        condition: service_started
 
-  # worker:
-  #   build:
-  #     context: ./src/Worker
-  #   environment:
-  #     ConnectionStrings__Library: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-library};Username=${POSTGRES_USER:-library};Password=${POSTGRES_PASSWORD:-library}"
-  #     RabbitMq__HostName: rabbitmq
-  #     RabbitMq__UserName: ${RABBITMQ_USER:-guest}
-  #     RabbitMq__Password: ${RABBITMQ_PASSWORD:-guest}
-
-  # web:
-  #   build:
-  #     context: ./src/web         
-  #   ports:
-  #     - "4200:80"
-  #   depends_on:
-  #     - api
+  web:
+    build:
+      context: ./src/web
+      dockerfile: Dockerfile
+    container_name: home-library-web
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
 
 volumes:
   postgres-data:
