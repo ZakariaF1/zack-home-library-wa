@@ -13,6 +13,8 @@ Bulk CSV import for a home book library: Angular UI → .NET API → RabbitMQ �
 | `dotnet test src/HomeLibrary.slnx` | Run xUnit tests |
 | `dotnet run --project src/HomeLibrary.Api` | Run API locally (`http://localhost:8080`) |
 | `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally (consumes queue → inserts books) |
+| `npm install` (in `src/web`) | Install Angular dependencies |
+| `npm start` (in `src/web`) | Serve UI at `http://localhost:4200` (proxies `/api` → `:8080`) |
 
 ### Typical workflow (current)
 
@@ -22,10 +24,11 @@ docker compose up -d
 dotnet test src/HomeLibrary.slnx
 dotnet run --project src/HomeLibrary.Api
 dotnet run --project src/HomeLibrary.Worker
-# POST multipart CSV to /api/imports ; GET /api/books after a moment
+cd src/web && npm install && npm start
+# open http://localhost:4200 and drop samples/sample-books-10.csv
 ```
 
-Angular UI and full Compose packaging come next. Architecture: [docs/ard.md](docs/ard.md).
+Full Compose packaging comes next. Architecture: [docs/ard.md](docs/ard.md).
 
 ---
 
