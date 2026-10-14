@@ -11,6 +11,7 @@ public sealed class QueueBookImport(
     public async Task<QueueBookImportResult> ExecuteAsync(
         Stream? csvStream,
         string? contentType,
+        string? fileName = null,
         CancellationToken cancellationToken = default)
     {
         if (csvStream is null)
@@ -18,9 +19,9 @@ public sealed class QueueBookImport(
             throw new UseCaseException("A CSV file is required.");
         }
 
-        if (!IsCsvContentType(contentType))
+        if (!IsAcceptableCsvUpload(contentType, fileName))
         {
-            throw new UseCaseException("Content type must be text/csv.");
+            throw new UseCaseException("Upload a .csv file (name, author, genre).");
         }
 
         var rows = csvBookParser.Parse(csvStream);
@@ -42,6 +43,20 @@ public sealed class QueueBookImport(
         return new QueueBookImportResult(queuedCount);
     }
 
+    private static bool IsAcceptableCsvUpload(string? contentType, string? fileName)
+    {
+        var hasCsvExtension = !string.IsNullOrWhiteSpace(fileName)
+            && fileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase);
+
+        // Browsers often send CSV as text/plain or application/octet-stream.
+        if (hasCsvExtension)
+        {
+            return true;
+        }
+
+        return IsCsvContentType(contentType);
+    }
+
     private static bool IsCsvContentType(string? contentType)
     {
         if (string.IsNullOrWhiteSpace(contentType))
@@ -52,7 +67,9 @@ public sealed class QueueBookImport(
         var mediaType = contentType.Split(';', 2)[0].Trim();
         return mediaType.Equals("text/csv", StringComparison.OrdinalIgnoreCase)
                || mediaType.Equals("application/csv", StringComparison.OrdinalIgnoreCase)
-               || mediaType.Equals("application/vnd.ms-excel", StringComparison.OrdinalIgnoreCase);
+               || mediaType.Equals("application/vnd.ms-excel", StringComparison.OrdinalIgnoreCase)
+               || mediaType.Equals("text/plain", StringComparison.OrdinalIgnoreCase)
+               || mediaType.Equals("application/octet-stream", StringComparison.OrdinalIgnoreCase);
     }
 }
 

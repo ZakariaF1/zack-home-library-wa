@@ -24,7 +24,14 @@ export class LibraryService {
 
   importCsv(file: File): Observable<ImportResponse> {
     const form = new FormData();
-    form.append('file', file, file.name);
+    // Browsers often tag CSV as text/plain; force a CSV-friendly type + keep .csv name.
+    const csvFile =
+      file.type === 'text/csv'
+        ? file
+        : new File([file], file.name.endsWith('.csv') ? file.name : `${file.name}.csv`, {
+            type: 'text/csv',
+          });
+    form.append('file', csvFile, csvFile.name);
 
     return this.http
       .post<ImportResponse>('/api/imports', form, { observe: 'response' })
