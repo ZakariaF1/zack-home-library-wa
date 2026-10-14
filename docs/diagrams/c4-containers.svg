@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" aria-labelledby="title desc">
+  <title id="title">C4 Containers  Home Library</title>
+  <desc id="desc">Angular web, API, Worker, PostgreSQL, and RabbitMQ containers.</desc>
+  <rect width="900" height="480" fill="#f7f7f4"/>
+  <text x="24" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">C4 Containers  Home Library</text>
+
+  <rect x="40" y="80" width="160" height="80" rx="8" fill="#dce8f5" stroke="#2f5d8a" stroke-width="2"/>
+  <text x="120" y="115" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">Angular Web</text>
+  <text x="120" y="135" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334">SPA + Tailwind</text>
+
+  <rect x="280" y="80" width="160" height="80" rx="8" fill="#e8f0e4" stroke="#3d6b3d" stroke-width="2"/>
+  <text x="360" y="115" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">API</text>
+  <text x="360" y="135" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334">ASP.NET Core</text>
+
+  <rect x="520" y="80" width="160" height="80" rx="8" fill="#e8f0e4" stroke="#3d6b3d" stroke-width="2"/>
+  <text x="600" y="115" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">Worker</text>
+  <text x="600" y="135" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334">.NET Worker</text>
+
+  <rect x="280" y="280" width="160" height="80" rx="8" fill="#f5ecd9" stroke="#8a6a2f" stroke-width="2"/>
+  <text x="360" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">PostgreSQL</text>
+  <text x="360" y="335" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334">library table</text>
+
+  <rect x="520" y="280" width="160" height="80" rx="8" fill="#f5ecd9" stroke="#8a6a2f" stroke-width="2"/>
+  <text x="600" y="315" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">RabbitMQ</text>
+  <text x="600" y="335" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334">book-imports</text>
+
+  <line x1="200" y1="120" x2="280" y2="120" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="210" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="11">HTTP</text>
+
+  <line x1="440" y1="120" x2="520" y2="120" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="450" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="11">via queue</text>
+
+  <line x1="360" y1="160" x2="360" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="368" y="230" font-family="Segoe UI, Arial, sans-serif" font-size="11">GET books</text>
+
+  <line x1="600" y1="160" x2="600" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="608" y="230" font-family="Segoe UI, Arial, sans-serif" font-size="11">consume</text>
+
+  <path d="M400 140 C 460 180, 540 180, 560 160" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="460" y="175" font-family="Segoe UI, Arial, sans-serif" font-size="11">publish</text>
+
+  <path d="M560 300 C 500 240, 420 240, 400 300" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="255" font-family="Segoe UI, Arial, sans-serif" font-size="11">INSERT books</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

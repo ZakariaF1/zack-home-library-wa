@@ -1,4 +1,32 @@
-# Home Library - Take-Home Assignment
+# Home Library
+
+Bulk CSV import for a home book library: Angular UI → .NET API → RabbitMQ → Worker → PostgreSQL.
+
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `cp .env.example .env` | Create local env defaults (optional; Compose has baked-in defaults) |
+| `docker compose up -d` | Start PostgreSQL + RabbitMQ |
+| `dotnet restore src/HomeLibrary.slnx` | Restore .NET dependencies |
+| `dotnet build src/HomeLibrary.slnx` | Build API, Worker, and libraries |
+| `dotnet test src/HomeLibrary.slnx` | Run xUnit tests |
+| `dotnet run --project src/HomeLibrary.Api` | Run API locally (`/health`) |
+| `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally (placeholder until import consumer lands) |
+
+### Typical workflow (current)
+
+```bash
+cp .env.example .env
+docker compose up -d
+dotnet test src/HomeLibrary.slnx
+```
+
+Full-stack `docker compose up -d --build` (API + Worker + web) and import endpoints are being added in follow-up changes. Architecture: [docs/ard.md](docs/ard.md).
+
+---
+
+## Assignment brief
 
 Welcome! **Fork this repository** and build your solution in your fork. This starter gives you the
 infrastructure (PostgreSQL + RabbitMQ via Docker Compose) and sample data, so you can spend your time
