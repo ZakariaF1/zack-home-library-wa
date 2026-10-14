@@ -1,0 +1,14 @@
+**/.git
+**/.vs
+**/bin
+**/obj
+**/node_modules
+**/dist
+**/.angular
+**/.npm-cache
+**/TestResults
+**/*.md
+!README.md
+!SOLUTION.md
+!docs/**
+.env

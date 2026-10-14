@@ -43,7 +43,7 @@ Layered .NET solution with inward dependencies:
 - **Api** publishes and reads only; **Worker** is the only process that inserts books.
 - **Angular** UI with Tailwind; Docker Compose wires postgres, rabbitmq, api, worker, web.
 
-Status at foundation: solution skeleton and CI exist; feature wiring is **target** until subsequent merges.
+Status: full stack is implemented and runnable via Compose (Api, Worker, Angular web, Postgres, RabbitMQ).
 
 ---
 
@@ -68,17 +68,17 @@ Status at foundation: solution skeleton and CI exist; feature wiring is **target
 
 ## Deployment
 
-**Target** topology (Compose):
+**Current** topology (Compose):
 
 | Service | Image / build | Host ports (default) |
 | --- | --- | --- |
 | postgres | `postgres:16` | 5432 |
 | rabbitmq | `rabbitmq:3.13-management` | 5672, 15672 |
-| api | build `HomeLibrary.Api` | 8080 |
-| worker | build `HomeLibrary.Worker` | (none) |
-| web | build Angular → nginx | 4200 |
+| api | `src/HomeLibrary.Api/Dockerfile` | 8080 |
+| worker | `src/HomeLibrary.Worker/Dockerfile` | (none) |
+| web | `src/web/Dockerfile` (nginx + Angular build) | 4200 |
 
-Bring-up command (once services are enabled): `docker compose up -d --build`.
+Bring-up: `docker compose up -d --build`. UI at http://localhost:4200; API at http://localhost:8080; RabbitMQ management at http://localhost:15672.
 
 ![Deployment](diagrams/deployment.svg)
 

@@ -7,28 +7,22 @@ Bulk CSV import for a home book library: Angular UI → .NET API → RabbitMQ �
 | Command | What it does |
 | --- | --- |
 | `cp .env.example .env` | Create local env defaults (optional; Compose has baked-in defaults) |
-| `docker compose up -d` | Start PostgreSQL + RabbitMQ |
-| `dotnet restore src/HomeLibrary.slnx` | Restore .NET dependencies |
-| `dotnet build src/HomeLibrary.slnx` | Build API, Worker, and libraries |
+| `docker compose up -d --build` | Build and start Postgres, RabbitMQ, API, Worker, and web |
+| `docker compose down` | Stop the stack |
 | `dotnet test src/HomeLibrary.slnx` | Run xUnit tests |
 | `dotnet run --project src/HomeLibrary.Api` | Run API locally (`http://localhost:8080`) |
-| `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally (consumes queue → inserts books) |
-| `npm install` (in `src/web`) | Install Angular dependencies |
-| `npm start` (in `src/web`) | Serve UI at `http://localhost:4200` (proxies `/api` → `:8080`) |
+| `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally |
+| `npm install` / `npm start` (in `src/web`) | Local Angular UI (`http://localhost:4200`, proxies `/api`) |
 
-### Typical workflow (current)
+### Typical workflow
 
 ```bash
 cp .env.example .env
-docker compose up -d
-dotnet test src/HomeLibrary.slnx
-dotnet run --project src/HomeLibrary.Api
-dotnet run --project src/HomeLibrary.Worker
-cd src/web && npm install && npm start
+docker compose up -d --build
 # open http://localhost:4200 and drop samples/sample-books-10.csv
 ```
 
-Full Compose packaging comes next. Architecture: [docs/ard.md](docs/ard.md).
+Design notes: [SOLUTION.md](SOLUTION.md). Architecture: [docs/ard.md](docs/ard.md).
 
 ---
 
