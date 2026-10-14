@@ -82,7 +82,8 @@ export class App implements OnInit, OnDestroy {
       error: (err) => {
         this.uploading.set(false);
         this.awaitingWorker = false;
-        this.error.set(this.readError(err) ?? 'Import failed. Try again.');
+        this.status.set(null);
+        this.error.set(this.readError(err) ?? this.readHttpMessage(err) ?? 'Import failed. Try again.');
       },
     });
   }
@@ -153,4 +154,13 @@ export class App implements OnInit, OnDestroy {
     }
     return null;
   }
+
+  private readHttpMessage(err: unknown): string | null {
+    if (typeof err === 'object' && err !== null && 'message' in err) {
+      const message = (err as { message?: unknown }).message;
+      return typeof message === 'string' && message.length > 0 ? message : null;
+    }
+    return null;
+  }
 }
+

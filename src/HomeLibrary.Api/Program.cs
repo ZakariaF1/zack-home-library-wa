@@ -39,17 +39,12 @@ app.MapPost("/api/imports", async (
 
     try
     {
-        var contentType = file.ContentType;
-        if (string.IsNullOrWhiteSpace(contentType)
-            || contentType.Equals("application/octet-stream", StringComparison.OrdinalIgnoreCase))
-        {
-            contentType = file.FileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)
-                ? "text/csv"
-                : contentType;
-        }
-
         await using var stream = file.OpenReadStream();
-        var result = await queueBookImport.ExecuteAsync(stream, contentType, cancellationToken);
+        var result = await queueBookImport.ExecuteAsync(
+            stream,
+            file.ContentType,
+            file.FileName,
+            cancellationToken);
         // Explicit JSON + 202 so clients reliably receive the body.
         return Results.Json(new { queuedCount = result.QueuedCount }, statusCode: StatusCodes.Status202Accepted);
     }
