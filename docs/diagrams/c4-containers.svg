@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" aria-labelledby="title desc">
-  <title id="title">C4 Containers  Home Library</title>
+  <title id="title">C4 Containers - Home Library</title>
   <desc id="desc">Angular web, API, Worker, PostgreSQL, and RabbitMQ containers.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
   <rect width="900" height="480" fill="#f7f7f4"/>
-  <text x="24" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">C4 Containers  Home Library</text>
+  <text x="24" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">C4 Containers - Home Library</text>
 
   <rect x="40" y="80" width="160" height="80" rx="8" fill="#dce8f5" stroke="#2f5d8a" stroke-width="2"/>
   <text x="120" y="115" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">Angular Web</text>
@@ -41,10 +46,4 @@
 
   <path d="M560 300 C 500 240, 420 240, 400 300" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
   <text x="430" y="255" font-family="Segoe UI, Arial, sans-serif" font-size="11">INSERT books</text>
-
-  <defs>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
-    </marker>
-  </defs>
 </svg>
