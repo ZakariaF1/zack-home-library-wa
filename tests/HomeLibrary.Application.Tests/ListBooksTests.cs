@@ -7,7 +7,7 @@ namespace HomeLibrary.Application.Tests;
 public class ListBooksTests
 {
     [Fact]
-    public async Task ExecuteAsync_returns_books_newest_first()
+    public async Task ExecuteAsync_when_books_exist_returns_newest_first()
     {
         var repository = new FakeBookRepository();
         var older = Book.Create("Older", "A", "G", new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero));

@@ -7,7 +7,7 @@ namespace HomeLibrary.Application.Tests;
 public class PersistImportedBookTests
 {
     [Fact]
-    public async Task ExecuteAsync_adds_book_to_repository()
+    public async Task ExecuteAsync_with_valid_message_adds_book_to_repository()
     {
         var repository = new FakeBookRepository();
         var sut = new PersistImportedBook(repository, NullLogger<PersistImportedBook>.Instance);

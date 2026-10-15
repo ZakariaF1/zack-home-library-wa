@@ -9,7 +9,7 @@ public class CsvBookParserTests
     private readonly CsvBookParser _sut = new();
 
     [Fact]
-    public void Parse_skips_incomplete_rows_and_returns_valid_ones()
+    public void Parse_with_incomplete_rows_skips_them_and_returns_valid()
     {
         const string csv = """
             name,author,genre

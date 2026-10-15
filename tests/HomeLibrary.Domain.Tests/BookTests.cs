@@ -45,7 +45,7 @@ public class BookTests
     }
 
     [Fact]
-    public void Create_trims_whitespace()
+    public void Create_with_padded_whitespace_trims_fields()
     {
         var book = Book.Create("  Dune  ", "  Frank Herbert  ", "  Science Fiction  ");
 
