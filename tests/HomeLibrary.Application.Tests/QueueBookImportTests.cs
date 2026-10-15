@@ -17,7 +17,7 @@ public class QueueBookImportTests
     }
 
     [Fact]
-    public async Task ExecuteAsync_publishes_each_parsed_row()
+    public async Task ExecuteAsync_with_parsed_rows_publishes_each()
     {
         _parser.Rows =
         [
@@ -36,7 +36,7 @@ public class QueueBookImportTests
     }
 
     [Fact]
-    public async Task ExecuteAsync_accepts_browser_text_plain_when_filename_is_csv()
+    public async Task ExecuteAsync_with_text_plain_and_csv_filename_accepts()
     {
         _parser.Rows = [new ParsedBookRow("Dune", "Frank Herbert", "Science Fiction")];
         await using var stream = new MemoryStream("csv"u8.ToArray());
@@ -48,7 +48,7 @@ public class QueueBookImportTests
     }
 
     [Fact]
-    public async Task ExecuteAsync_accepts_csv_content_type_with_charset()
+    public async Task ExecuteAsync_with_csv_charset_content_type_accepts()
     {
         _parser.Rows = [new ParsedBookRow("Dune", "Frank Herbert", "Science Fiction")];
         await using var stream = new MemoryStream("csv"u8.ToArray());
