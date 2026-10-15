@@ -14,6 +14,7 @@ export class App implements OnInit, OnDestroy {
   private pollHandle: ReturnType<typeof setInterval> | null = null;
   private pollTicks = 0;
   private booksBeforeImport = 0;
+  private queuedExpected = 0;
   private awaitingWorker = false;
 
   readonly books = signal<Book[]>([]);
@@ -73,6 +74,7 @@ export class App implements OnInit, OnDestroy {
     this.library.importCsv(file).subscribe({
       next: (result) => {
         this.uploading.set(false);
+        this.queuedExpected = result.queuedCount;
         this.awaitingWorker = true;
         this.status.set(
           `Queued ${result.queuedCount} books. Waiting for the worker to save them…`,
@@ -82,6 +84,7 @@ export class App implements OnInit, OnDestroy {
       error: (err) => {
         this.uploading.set(false);
         this.awaitingWorker = false;
+        this.queuedExpected = 0;
         this.status.set(null);
         this.error.set(this.readError(err) ?? this.readHttpMessage(err) ?? 'Import failed. Try again.');
       },
@@ -95,10 +98,24 @@ export class App implements OnInit, OnDestroy {
         this.loading.set(false);
         this.error.set(null);
 
-        if (this.awaitingWorker && books.length > this.booksBeforeImport) {
+        if (!this.awaitingWorker) {
+          return;
+        }
+
+        const saved = books.length - this.booksBeforeImport;
+        if (saved >= this.queuedExpected) {
           this.awaitingWorker = false;
           this.stopPolling();
-          this.status.set(`Import complete — ${books.length} books on the shelf.`);
+          this.status.set(
+            `Import complete — ${this.queuedExpected} saved (${books.length} on the shelf).`,
+          );
+          return;
+        }
+
+        if (saved > 0) {
+          this.status.set(
+            `Saving… ${saved} of ${this.queuedExpected} appeared on the shelf.`,
+          );
         }
       },
       error: () => {
@@ -125,9 +142,15 @@ export class App implements OnInit, OnDestroy {
       if (this.pollTicks >= 20) {
         this.stopPolling();
         this.awaitingWorker = false;
-        if (this.books().length <= this.booksBeforeImport) {
+        const saved = this.books().length - this.booksBeforeImport;
+        if (saved <= 0) {
           this.error.set(
             'Books were queued, but none appeared. Make sure the Worker container/process is running.',
+          );
+          this.status.set(null);
+        } else if (saved < this.queuedExpected) {
+          this.error.set(
+            `Only ${saved} of ${this.queuedExpected} queued books appeared. Check that the Worker is running.`,
           );
           this.status.set(null);
         }
