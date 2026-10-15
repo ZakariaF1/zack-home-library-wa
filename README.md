@@ -9,7 +9,7 @@ Bulk CSV import for a home book library: Angular UI → .NET API → RabbitMQ �
 | `cp .env.example .env` | Create local env defaults (optional; Compose has baked-in defaults) |
 | `docker compose up -d --build` | Build and start Postgres, RabbitMQ, API, Worker, and web |
 | `docker compose down` | Stop the stack |
-| `dotnet test src/HomeLibrary.slnx` | Run xUnit tests |
+| `dotnet test --solution src/HomeLibrary.slnx` | Run xUnit v3 tests (Microsoft.Testing.Platform) |
 | `dotnet run --project src/HomeLibrary.Api` | Run API locally (`http://localhost:8080`) |
 | `dotnet run --project src/HomeLibrary.Worker` | Run Worker locally |
 | `npm install` / `npm start` (in `src/web`) | Local Angular UI (`http://localhost:4200`, proxies `/api`) |
