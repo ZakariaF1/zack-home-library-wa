@@ -1,6 +1,6 @@
 # Home Library — agent brief
 
-Short, project-specific guidance. Deep standards live in [docs/engineering-charter.md](docs/engineering-charter.md). Architecture: [docs/ard.md](docs/ard.md). Runnable commands: [README.md](README.md).
+Short, project-specific guidance. Architecture: [docs/ard.md](docs/ard.md). Runnable commands: [README.md](README.md).
 
 ## Stack
 

@@ -1,6 +1,9 @@
 # ---- Environment ----
 .env
 
+# ---- Local-only standards (not shared in the repo) ----
+docs/engineering-charter.md
+
 # ---- .NET ----
 bin/
 obj/
