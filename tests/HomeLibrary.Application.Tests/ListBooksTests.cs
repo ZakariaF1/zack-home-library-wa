@@ -17,7 +17,7 @@ public class ListBooksTests
             Book.Restore(2, newer.Name, newer.Author, newer.Genre, newer.ImportDate));
 
         var sut = new ListBooks(repository);
-        var result = await sut.ExecuteAsync();
+        var result = await sut.ExecuteAsync(TestContext.Current.CancellationToken);
 
         Assert.Equal(2, result.Count);
         Assert.Equal("Newer", result[0].Name);
@@ -30,7 +30,7 @@ public class ListBooksTests
     {
         var sut = new ListBooks(new FakeBookRepository());
 
-        var result = await sut.ExecuteAsync();
+        var result = await sut.ExecuteAsync(TestContext.Current.CancellationToken);
 
         Assert.Empty(result);
     }

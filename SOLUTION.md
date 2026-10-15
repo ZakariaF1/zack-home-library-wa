@@ -17,7 +17,7 @@ See [README.md](README.md) for the full command table and local (non-Compose) wo
 - **Light layering**: Domain / Application / Infrastructure / Api / Worker with inward dependencies. A simple `Book` entity and ports — no value-object ceremony, MediatR, or domain events — kept the take-home focused on the messaging split.
 - **EF Core migrations** create the `library` table on startup (with retry). `db/init.sql` remains as an optional reference.
 - **Angular + Tailwind + signals** for the portal; poll after upload because persistence is asynchronous.
-- **xUnit** for domain and application tests with fakes at the ports.
+- **xUnit v3** (Microsoft.Testing.Platform) for domain and application tests with fakes at the ports.
 
 ## Assumptions
 

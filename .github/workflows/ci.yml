@@ -24,7 +24,7 @@ jobs:
         run: dotnet build src/HomeLibrary.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test src/HomeLibrary.slnx --configuration Release --no-build --verbosity normal
+        run: dotnet test --solution src/HomeLibrary.slnx --configuration Release --no-build --verbosity normal
 
       - name: Setup Node
         uses: actions/setup-node@v4

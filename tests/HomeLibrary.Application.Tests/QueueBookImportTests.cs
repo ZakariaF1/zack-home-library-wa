@@ -26,7 +26,8 @@ public class QueueBookImportTests
         ];
 
         await using var stream = new MemoryStream("csv"u8.ToArray());
-        var result = await _sut.ExecuteAsync(stream, "text/csv", "books.csv");
+        var result = await _sut.ExecuteAsync(
+            stream, "text/csv", "books.csv", TestContext.Current.CancellationToken);
 
         Assert.Equal(2, result.QueuedCount);
         Assert.Equal(2, _publisher.Published.Count);
@@ -40,7 +41,8 @@ public class QueueBookImportTests
         _parser.Rows = [new ParsedBookRow("Dune", "Frank Herbert", "Science Fiction")];
         await using var stream = new MemoryStream("csv"u8.ToArray());
 
-        var result = await _sut.ExecuteAsync(stream, "text/plain", "sample-books-10.csv");
+        var result = await _sut.ExecuteAsync(
+            stream, "text/plain", "sample-books-10.csv", TestContext.Current.CancellationToken);
 
         Assert.Equal(1, result.QueuedCount);
     }
@@ -51,7 +53,8 @@ public class QueueBookImportTests
         _parser.Rows = [new ParsedBookRow("Dune", "Frank Herbert", "Science Fiction")];
         await using var stream = new MemoryStream("csv"u8.ToArray());
 
-        var result = await _sut.ExecuteAsync(stream, "text/csv; charset=utf-8", "books.csv");
+        var result = await _sut.ExecuteAsync(
+            stream, "text/csv; charset=utf-8", "books.csv", TestContext.Current.CancellationToken);
 
         Assert.Equal(1, result.QueuedCount);
     }
@@ -59,7 +62,8 @@ public class QueueBookImportTests
     [Fact]
     public async Task ExecuteAsync_without_file_throws()
     {
-        var ex = await Assert.ThrowsAsync<UseCaseException>(() => _sut.ExecuteAsync(null, "text/csv"));
+        var ex = await Assert.ThrowsAsync<UseCaseException>(() =>
+            _sut.ExecuteAsync(null, "text/csv", cancellationToken: TestContext.Current.CancellationToken));
         Assert.Contains("required", ex.Message, StringComparison.OrdinalIgnoreCase);
         Assert.Empty(_publisher.Published);
     }
@@ -69,8 +73,8 @@ public class QueueBookImportTests
     {
         await using var stream = new MemoryStream("csv"u8.ToArray());
 
-        var ex = await Assert.ThrowsAsync<UseCaseException>(
-            () => _sut.ExecuteAsync(stream, "application/json", "books.json"));
+        var ex = await Assert.ThrowsAsync<UseCaseException>(() =>
+            _sut.ExecuteAsync(stream, "application/json", "books.json", TestContext.Current.CancellationToken));
         Assert.Contains(".csv", ex.Message, StringComparison.OrdinalIgnoreCase);
         Assert.Empty(_publisher.Published);
     }
@@ -81,7 +85,8 @@ public class QueueBookImportTests
         _parser.Rows = [];
         await using var stream = new MemoryStream("csv"u8.ToArray());
 
-        var ex = await Assert.ThrowsAsync<UseCaseException>(() => _sut.ExecuteAsync(stream, "text/csv", "books.csv"));
+        var ex = await Assert.ThrowsAsync<UseCaseException>(() =>
+            _sut.ExecuteAsync(stream, "text/csv", "books.csv", TestContext.Current.CancellationToken));
         Assert.Contains("no valid", ex.Message, StringComparison.OrdinalIgnoreCase);
         Assert.Empty(_publisher.Published);
     }

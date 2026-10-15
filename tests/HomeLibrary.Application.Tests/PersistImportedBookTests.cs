@@ -12,7 +12,9 @@ public class PersistImportedBookTests
         var repository = new FakeBookRepository();
         var sut = new PersistImportedBook(repository, NullLogger<PersistImportedBook>.Instance);
 
-        await sut.ExecuteAsync(new BookImportMessage("Dune", "Frank Herbert", "Science Fiction"));
+        await sut.ExecuteAsync(
+            new BookImportMessage("Dune", "Frank Herbert", "Science Fiction"),
+            TestContext.Current.CancellationToken);
 
         Assert.Single(repository.Books);
         Assert.Equal("Dune", repository.Books[0].Name);
