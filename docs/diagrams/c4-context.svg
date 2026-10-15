@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
-  <title id="title">C4 Context  Home Library</title>
+  <title id="title">C4 Context - Home Library</title>
   <desc id="desc">A librarian user interacts with the Home Library system, which uses PostgreSQL and RabbitMQ.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
   <rect width="720" height="420" fill="#f7f7f4"/>
-  <text x="24" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">C4 Context  Home Library</text>
+  <text x="24" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">C4 Context - Home Library</text>
 
   <rect x="280" y="40" width="160" height="70" rx="8" fill="#dce8f5" stroke="#2f5d8a" stroke-width="2"/>
   <text x="360" y="72" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">Librarian</text>
@@ -27,10 +32,4 @@
   <rect x="460" y="310" width="200" height="70" rx="8" fill="#f5ecd9" stroke="#8a6a2f" stroke-width="2"/>
   <text x="560" y="342" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">RabbitMQ</text>
   <text x="560" y="362" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#334">External message broker</text>
-
-  <defs>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
-    </marker>
-  </defs>
 </svg>
