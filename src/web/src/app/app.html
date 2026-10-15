@@ -74,6 +74,7 @@
           <table class="min-w-full text-left text-sm">
             <thead class="bg-stone-100 text-stone-600">
               <tr>
+                <th class="w-14 px-4 py-3 font-medium">#</th>
                 <th class="px-4 py-3 font-medium">Name</th>
                 <th class="px-4 py-3 font-medium">Author</th>
                 <th class="px-4 py-3 font-medium">Genre</th>
@@ -81,8 +82,9 @@
               </tr>
             </thead>
             <tbody>
-              @for (book of books(); track book.id) {
+              @for (book of books(); track book.id; let i = $index) {
                 <tr class="border-t border-stone-100">
+                  <td class="px-4 py-3 tabular-nums text-stone-500">{{ i + 1 }}</td>
                   <td class="px-4 py-3 font-medium">{{ book.name }}</td>
                   <td class="px-4 py-3">{{ book.author }}</td>
                   <td class="px-4 py-3">{{ book.genre }}</td>
@@ -94,11 +96,14 @@
         </div>
 
         <ul class="divide-y divide-stone-100 desktop:hidden">
-          @for (book of books(); track book.id) {
-            <li class="px-4 py-4">
-              <p class="font-medium">{{ book.name }}</p>
-              <p class="text-sm text-stone-600">{{ book.author }} · {{ book.genre }}</p>
-              <p class="mt-1 text-xs text-stone-500">{{ book.importDate | date: 'medium' }}</p>
+          @for (book of books(); track book.id; let i = $index) {
+            <li class="flex gap-3 px-4 py-4">
+              <span class="w-6 shrink-0 tabular-nums text-sm text-stone-500">{{ i + 1 }}</span>
+              <div>
+                <p class="font-medium">{{ book.name }}</p>
+                <p class="text-sm text-stone-600">{{ book.author }} · {{ book.genre }}</p>
+                <p class="mt-1 text-xs text-stone-500">{{ book.importDate | date: 'medium' }}</p>
+              </div>
             </li>
           }
         </ul>
